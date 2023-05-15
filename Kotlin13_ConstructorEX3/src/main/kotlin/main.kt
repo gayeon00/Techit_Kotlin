@@ -6,7 +6,7 @@ fun main() {
     var inputNumber = 0
 
     while (true) {
-        inputNumber = carFactory.getCommand()
+        inputNumber = carFactory.selectCarType()
         if(inputNumber==0){
             println("생산을 종료합니다")
             break
@@ -48,20 +48,20 @@ class CarFactory {
         println("자동차 공장 가동 시작합니다\n")
     }
 
-    fun getCommand(): Int {
-        var command = 0
+    fun selectCarType(): Int {
+        var carNumber = 0
         while (true) {
             println("생산할 자동차를 선택해주세요")
             print("1. 붕붕, 2. 승용차, 3. 버스, 4. 트럭, 0. 생산종료 : ")
-            command = sc.nextInt()
-            if (command in 0..4) {
+            carNumber = sc.nextInt()
+            if (carNumber in 0..4) {
                 break
             } else {
                 println("잘못 입력하였습니다")
             }
         }
 
-        return command
+        return carNumber
     }
 
     // 생산된 장난감을 저장한다.
