@@ -92,19 +92,6 @@ class School {
             student.printStudentInfo()
         }
     }
-    //교실, 운동장, 체육관, 수영장 운영 메서드
-    fun actionStudent(){
-        val classRoom = ClassRoom()
-        val field = Field()
-        val stadium =Stadium()
-        val pool = Pool()
-
-        classRoom.study()
-        field.playSoccer()
-        stadium.playVolleyBall()
-        pool.swim()
-
-    }
 
     //학교 정리 출력 메서드
     fun printSchoolInfo() {
@@ -232,18 +219,18 @@ open class Student(
     }
 
     fun study() {
-        println("${name} 학생이 교실에서 공부하고 있습니다.")
+        println("$name 학생이 교실에서 공부하고 있습니다.")
     }
 }
 
 class SoccerClubStudent(department: Department, name: String, grade: Int, korScore: Int, engScore: Int, matScore: Int) :
     Student(department, name, grade, korScore, engScore, matScore), SoccerPlayer, SwimmingPlayer {
     override fun playSoccer() {
-        println("${name} 학생이 운동장에서 축구를 하고 있습니다.")
+        println("$name 학생이 운동장에서 축구를 하고 있습니다.")
     }
 
     override fun swim() {
-        println("${name} 학생이 수영장에서 수영을 하고 있습니다.")
+        println("$name 학생이 수영장에서 수영을 하고 있습니다.")
 
     }
 }
