@@ -12,7 +12,7 @@ fun main() {
 
     // 만약 인터페이스를 구현하거나 클래스를 상속받은 클래스를 통해 객체를 하나만 생성한다면
     // 익명 중첩클래스를 사용해도 된다.
-    val t2 = object : Inter1{
+    val t2 = object : Inter1 {
         override fun interMethod1() {
             println("익명 중첩 클래스의 interMethod1")
         }
@@ -25,8 +25,6 @@ fun main() {
     t2.interMethod2()
 
 }
-
-
 
 // 일반 중첩 클래스
 // 내부에 있는 클래스의 객체 생성은 외부 클래스로 부터생성한 객체를 통해 생성 가능
@@ -48,13 +46,13 @@ class Outer1 {
     }
 }
 
-interface Inter1{
+interface Inter1 {
 
     fun interMethod1()
     fun interMethod2()
 }
 
-class TestClass1 : Inter1{
+class TestClass1 : Inter1 {
     override fun interMethod1() {
         println("TestClass1의 interMethod1")
     }
