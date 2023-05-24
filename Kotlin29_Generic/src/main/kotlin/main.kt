@@ -28,6 +28,7 @@ fun main() {
 
     /* 공변성 : 변수에 설정한 제네릭이 객체를 생성했을 때 사용한 제네릭의 부모 클래스인 경우
      에도 변수에 담을 수 있다.*/
+//    class TestClass6<out A>()
     val t10: TestClass6<SubClass1> = TestClass6<SubClass1>()
     //자식을 부모에 담는 꼴이라고 생각하자!
     val t11: TestClass6<SuperClass1> = TestClass6<SubClass1>()
@@ -36,6 +37,7 @@ fun main() {
 
     /*반공변성 : 변수에 설정한 제네릭이 객체를 생성했을 때 사용한 제네릭의 자식 클래스인 경우에도 변수에 담을 수 있음*/
     //딱 공변성의 반대!!
+//	class TestClass7<in A>()
     val t13: TestClass7<SubClass1> = TestClass7<SubClass1>()
     //얘는 안됨
 //    val t14: TestClass7<SuperClass1> = TestClass7<SubClass1>()

@@ -164,6 +164,7 @@ class School {
             }
         }
     }
+
     inner class Field{
         fun playSoccer(){
             for(student in studentList){
