@@ -2,7 +2,7 @@ import java.io.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class MemoManager {
+class MemoManager(val category: Int) {
     //특정 카테고리의 메모들
     val memoList = ArrayList<Memo>()
     val sc = Scanner(System.`in`)
@@ -29,7 +29,11 @@ class MemoManager {
 
             while (true) {
                 try {
-                    memoList.add(ois.readObject() as Memo)
+                    val tmp = ois.readObject() as Memo
+                    if (tmp.category == category) {
+                        memoList.add(tmp)
+                    }
+
                 } catch (e: EOFException) {
                     break
                 }
@@ -129,7 +133,7 @@ class MemoManager {
                 val temp2 = br.readLine()
                 val newContent = if (temp2 == "0") memo.contents else temp2
 
-                memoList[input - 1] = Memo(newTitle, newContent)
+                memoList[input - 1] = Memo(input - 1, newTitle, newContent)
                 saveMemosToFile(memoList)
                 break
             } catch (e: InputMismatchException) {
@@ -148,16 +152,16 @@ class MemoManager {
         print("메모 내용 : ")
         val content = br.readLine()
 
-        memoList.add(Memo(title, content))
+        val tmp = memoList.size
+        memoList.add(Memo(tmp, title, content))
         saveMemosToFile(memoList)
     }
 
     private fun getMemo() {
-        if(memoList.isEmpty()){
+        if (memoList.isEmpty()) {
             println()
             println("등록된 메모가 없습니다.")
-        }
-        else {
+        } else {
             while (true) {
                 println()
                 print("확인할 메모의 번호를 입력해주세요 (0. 이전) : ")

@@ -1,6 +1,6 @@
 import java.io.Serializable
 
-data class Memo(var title: String, var contents: String): Serializable {
+data class Memo(var category: Int, var title: String, var contents: String): Serializable {
     override fun toString(): String {
         return "Memo(title = $title, contents = $contents)"
     }

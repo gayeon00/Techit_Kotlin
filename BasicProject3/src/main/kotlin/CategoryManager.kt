@@ -28,7 +28,7 @@ class CategoryManager {
             while (true) {
                 try {
                     categoryList.add(ois.readObject().toString())
-                    memoManagerList.add(MemoManager())
+                    memoManagerList.add(MemoManager(categoryList.size - 1))
                 } catch (e: EOFException) {
                     break
                 }
@@ -91,7 +91,7 @@ class CategoryManager {
         print("등록할 카테고리 이름을 입력해주세요 : ")
         val categoryName = br.readLine()
         categoryList.add(categoryName)
-        memoManagerList.add(MemoManager())
+        memoManagerList.add(MemoManager(categoryList.size - 1))
         saveCategoriesToFile(categoryList)
     }
 
@@ -183,14 +183,14 @@ class CategoryManager {
     }
 
     fun printAllCategory() {
-        println()
 
         if (categoryList.isEmpty()) {
             println("등록된 카테고리가 없습니다")
         } else {
             for (i in 0 until categoryList.size) {
+                println()
                 println("---------------------------------------------")
-                println(i)
+                println(categoryList[i])
                 println("---------------------------------------------")
                 val memoList = memoManagerList[i]
 
