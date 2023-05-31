@@ -20,8 +20,9 @@ class LoginManager {
     fun run() {
         if (password.isEmpty()) { //비밀번호가 있을 경우
             setPassword()
+        } else {
+            login()
         }
-        login()
     }
 
     private fun login() {
