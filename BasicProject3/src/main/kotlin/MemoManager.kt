@@ -1,22 +1,57 @@
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.io.Serializable
+import java.io.*
 import java.util.*
+import kotlin.collections.ArrayList
 
-class Category(
-    var name: String,
-    var memoList: ArrayList<Memo>
-): Serializable {
+class MemoManager {
+    //특정 카테고리의 메모들
+    val memoList = ArrayList<Memo>()
     val sc = Scanner(System.`in`)
     val br = BufferedReader(InputStreamReader(System.`in`))
+    val file = File("memoList.txt")
+
+    init {
+        if (file.exists()) {
+            loadMemosFromFile()
+        } else {
+            file.createNewFile()
+        }
+    }
 
     fun run() {
         printMemoList()
         getInputNumber()
     }
 
-    override fun toString(): String {
-        return "Category(name = $name, memoList = $memoList)"
+    private fun loadMemosFromFile() {
+        try {
+            val fis = FileInputStream("memoList.txt")
+            val ois = ObjectInputStream(fis)
+
+            while (true) {
+                try {
+                    memoList.add(ois.readObject() as Memo)
+                } catch (e: EOFException) {
+                    break
+                }
+            }
+
+            ois.close()
+        } catch (e: Exception) {
+
+        }
+    }
+
+    private fun saveMemosToFile(memoList: List<Memo>) {
+        try {
+            val fos = FileOutputStream("memoList.txt")
+            val oos = ObjectOutputStream(fos)
+
+            for (i in memoList) {
+                oos.writeObject(i)
+            }
+        } catch (e: Exception) {
+
+        }
     }
 
     fun getInputNumber() {
@@ -59,6 +94,7 @@ class Category(
                 if (input == 0) break
 
                 memoList.removeAt(input - 1)
+                saveMemosToFile(memoList)
                 break
             } catch (e: InputMismatchException) {
                 sc.nextLine()
@@ -86,14 +122,15 @@ class Category(
                 println("현제 제목 : ${memo.title}")
                 print("메모의 새로운 제목을 입력해주세요 (0 입력 시 무시) : ")
                 val temp = br.readLine()
-                val new_title = if (temp == "0") memo.title else temp
+                val newTitle = if (temp == "0") memo.title else temp
 
                 println("현재 내용 : ${memo.contents}")
                 print("메모의 새로운 내용을 입력해주세요 (0 입력 시 무시) : ")
                 val temp2 = br.readLine()
-                val new_content = if (temp2 == "0") memo.contents else temp2
+                val newContent = if (temp2 == "0") memo.contents else temp2
 
-                memoList[input - 1] = Memo(new_title, new_content)
+                memoList[input - 1] = Memo(newTitle, newContent)
+                saveMemosToFile(memoList)
                 break
             } catch (e: InputMismatchException) {
                 sc.nextLine()
@@ -112,6 +149,7 @@ class Category(
         val content = br.readLine()
 
         memoList.add(Memo(title, content))
+        saveMemosToFile(memoList)
     }
 
     private fun getMemo() {
@@ -149,6 +187,7 @@ class Category(
 
     private fun printMemoList() {
         if (memoList.isEmpty()) {
+            println()
             println("등록된 메모가 없습니다.")
         }
         for (i in memoList) {
@@ -156,4 +195,3 @@ class Category(
         }
     }
 }
-
