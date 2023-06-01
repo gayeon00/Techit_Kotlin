@@ -6,6 +6,8 @@ fun main() {
     val t1 = fun(x1: Int, x2: Int): Int {
         return x1 + x2
     }
+
+    val t100 = { w1: Int, w2: Int -> w1 + w2 }
     // 고차함수 호출
     testFunc1(100, 200, t1)
 
@@ -80,10 +82,13 @@ fun main() {
     val ic2 = InterClass2()
     testFunc6(ic2)
 
+    //즉석으로 익명 클래스(익명 객체)를 넣어줌
+    //이름은 필수로 object로 해야함!
     testFunc6(object : Inter1 {
         override fun interMethod() {
-            println("익명 중첩 클래스의 메서드 호출")
+            TODO("Not yet implemented")
         }
+
     })
 
     // 고차함수를 이용해 다른곳에서 호출하는 메서드를 오버라이딩하는
