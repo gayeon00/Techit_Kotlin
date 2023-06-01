@@ -2,7 +2,7 @@ fun main(){
 
     // 리스트 생성
     // 불변형 리스트
-    // 리스트 생성 이후 값의 추가, 수정, 삽입, 삭제가 불가능하다.
+    // read only
     val list1 = listOf(10, 20, 30, 40, 50)
     println("list1 : $list1")
 
