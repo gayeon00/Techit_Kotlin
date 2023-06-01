@@ -28,6 +28,12 @@ fun main() {
     println(r4)
 }
 
+class Calculator2 {
+    fun processing(a1: Double, a2: Double, m: (Double, Double) -> Double): Double {
+        return m(a1, a2)
+    }
+}
+
 // 계산기
 class Calculator {
 
